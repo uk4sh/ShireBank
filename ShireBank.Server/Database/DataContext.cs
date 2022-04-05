@@ -5,10 +5,11 @@ namespace ShireBank.Server.Database
 {
     public class DataContext : DbContext
     {
+        public DataContext() { }
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -6,7 +6,7 @@ var logger = NLog.LogManager.GetCurrentClassLogger();
 
 try
 {
-    using (var channel = GrpcChannel.ForAddress(Constants.FullBankAddress, new GrpcChannelOptions { LoggerFactory = }))
+    using (var channel = GrpcChannel.ForAddress(Constants.FullBankAddress))
     {
         ManualResetEvent[] endOfWorkEvents =
             { new ManualResetEvent(false), new ManualResetEvent(false), new ManualResetEvent(false) };

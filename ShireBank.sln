@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShireBank.Shared", "ShireBank.Shared\ShireBank.Shared.csproj", "{1EF14A9F-9849-4078-BC2B-93765B3031F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShireBank.Shared", "ShireBank.Shared\ShireBank.Shared.csproj", "{1EF14A9F-9849-4078-BC2B-93765B3031F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShireBank.Inspector", "ShireBank.Inspector\ShireBank.Inspector.csproj", "{F8C508D8-EAB3-4D3B-8832-9FB5358ADABC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShireBank.Inspector", "ShireBank.Inspector\ShireBank.Inspector.csproj", "{F8C508D8-EAB3-4D3B-8832-9FB5358ADABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShireBank.Test", "ShireBank.Test\ShireBank.Test.csproj", "{B6E3E41A-3524-43D4-8021-03894D5C7E81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShireBank.Test", "ShireBank.Test\ShireBank.Test.csproj", "{B6E3E41A-3524-43D4-8021-03894D5C7E81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShireBank.Server", "ShireBank.Server\ShireBank.Server.csproj", "{8FC7BDE0-54E3-41D4-8BBF-4CE065925531}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShireBank.Server", "ShireBank.Server\ShireBank.Server.csproj", "{8FC7BDE0-54E3-41D4-8BBF-4CE065925531}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShireBank.UnitTests", "ShireBank.UnitTests\ShireBank.UnitTests.csproj", "{5ADFF37D-1520-49AA-9F54-703BA4275499}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{8FC7BDE0-54E3-41D4-8BBF-4CE065925531}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FC7BDE0-54E3-41D4-8BBF-4CE065925531}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FC7BDE0-54E3-41D4-8BBF-4CE065925531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ADFF37D-1520-49AA-9F54-703BA4275499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ADFF37D-1520-49AA-9F54-703BA4275499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ADFF37D-1520-49AA-9F54-703BA4275499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ADFF37D-1520-49AA-9F54-703BA4275499}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
