@@ -11,7 +11,7 @@ namespace ShireBank.Server.Models
         public TransactionType Type { get; set; }
         public DateTime Timestamp { get; set; }
 
-        public override string? ToString()
+        public override string ToString()
         {
             return $"{nameof(Id)}: {Id}\t {nameof(AccountId)}: {AccountId}\t {nameof(Value)}: {Value}\t {nameof(Balance)}: {Balance}\t {nameof(Type)}: {Enum.GetName(Type)}\t {nameof(Timestamp)}: {Timestamp.ToString("O")}";
         }

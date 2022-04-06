@@ -11,7 +11,7 @@
         public IEnumerable<Transaction> Transactions { get; set; }
         public int Version { get; set; }
 
-        public override string? ToString()
+        public override string ToString()
         {
             return $"{nameof(Id)}: {Id}\t {nameof(FirstName)}: {FirstName}\t {nameof(LastName)}: {LastName}\t {nameof(DebtLimit)}: {DebtLimit}\t {nameof(Balance)}: {Balance}\t {nameof(IsClosed)}: {(IsClosed ? "Yes" : "No")}\t {nameof(Version)}: {Version}\n"
                 + $"Transactions:\n{(Transactions?.Count() > 0 ? string.Join("\n", Transactions.OrderByDescending(t => t.Id)) : string.Empty)}" + "\n";
