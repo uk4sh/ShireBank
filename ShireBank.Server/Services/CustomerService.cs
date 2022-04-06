@@ -23,6 +23,7 @@ namespace ShireBank.Server.Services
             try
             {
                 var result = await _accountQueries.CloseAccount(request.AccountId);
+                _logger.LogInformation($"The account id '{request.AccountId}' was closed.");
                 return new CloseAccountResponse { IsSuccessful = result };
             }
             catch (Exception ex)
@@ -37,6 +38,7 @@ namespace ShireBank.Server.Services
             try
             {
                 await _resilientQueryHandler.HandleAsync(async () => await _accountQueries.DepositFunds(request.AccountId, request.Amount));
+                _logger.LogTrace($"The account id '{request.AccountId}' deposited {request.Amount}.");
                 return new DepositResponse();
             }
             catch (Exception ex)
@@ -65,6 +67,7 @@ namespace ShireBank.Server.Services
             try
             {
                 var newAccount = await _accountQueries.OpenAccount(request.FirstName, request.LastName, request.DebtLimit);
+                _logger.LogInformation($"The account id '{newAccount.Id}' was opened.");
                 return new OpenAccountResponse { AccountId = newAccount.Id };
             }
             catch (Exception ex)
@@ -79,6 +82,7 @@ namespace ShireBank.Server.Services
             try
             {
                 var withdrawnAmount = await _resilientQueryHandler.HandleAsync(async () => await _accountQueries.WithdrawFunds(request.AccountId, request.Amount));
+                _logger.LogTrace($"The account id '{request.AccountId}' withdrew {request.Amount}.");
                 return new WithdrawResponse { WithdrawnAmount = withdrawnAmount };
             }
             catch (Exception ex)
