@@ -7,6 +7,7 @@ using ShireBank.Server.Interceptors;
 using ShireBank.Server.Services;
 using NLog;
 using NLog.Web;
+using ShireBank.Shared;
 
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init main");
@@ -26,6 +27,8 @@ try
             options.Interceptors.Add<InspectionInterceptor>();
         });
 
+    builder.WebHost.UseUrls(Constants.BankBaseAddress);
+
     builder.Logging.ClearProviders();
     builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
     builder.Host.UseNLog();
@@ -36,6 +39,13 @@ try
     builder.Services.AddSingleton<IResilientQueryHandler, ResilientQuerybHandler>();
 
     var app = builder.Build();
+
+    // Create the db if doesn't exist and apply migrations
+    using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
+    {
+        var dataContext = serviceScope.ServiceProvider.GetRequiredService<DataContext>();
+        await dataContext.Database.MigrateAsync();
+    }
 
     // Configure the HTTP request pipeline.
     app.MapGrpcService<CustomerService>();
