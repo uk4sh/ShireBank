@@ -364,3 +364,5 @@ FodyWeavers.xsd
 
 */*.db*
 Scripts/ShireBankServer/*
+bin/
+obj/
