@@ -3,7 +3,7 @@ using System.Data.Common;
 
 namespace ShireBank.Server.Database.Handlers
 {
-    public class ResilientDbHandler : IResilientDbHandler
+    public class ResilientQuerybHandler : IResilientQueryHandler
     {
         private readonly TimeSpan[] _retryIntervals = new[]
         {

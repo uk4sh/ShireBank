@@ -9,14 +9,13 @@ namespace ShireBank.Server.Services
     {
         private readonly ILogger _logger;
         private readonly IAccountQueries _accountQueries;
-        private readonly IResilientDbHandler _resilientDbHandler;
+        private readonly IResilientQueryHandler _resilientQueryHandler;
 
-        // TODO: Add interceptor for exceptions?
-        public CustomerService(ILogger<CustomerService> logger, IAccountQueries accountQueries, IResilientDbHandler resilientDbHandler)
+        public CustomerService(ILogger<CustomerService> logger, IAccountQueries accountQueries, IResilientQueryHandler resilientQueryHandler)
         {
             _logger = logger;
             _accountQueries = accountQueries;
-            _resilientDbHandler = resilientDbHandler;
+            _resilientQueryHandler = resilientQueryHandler;
         }
 
         public override async Task<CloseAccountResponse> CloseAccount(CloseAccountRequest request, ServerCallContext context)
@@ -26,9 +25,9 @@ namespace ShireBank.Server.Services
                 var result = await _accountQueries.CloseAccount(request.AccountId);
                 return new CloseAccountResponse { IsSuccessful = result };
             }
-            catch
+            catch (Exception ex)
             {
-                _logger.LogWarning("Failed to close the account...");
+                _logger.LogWarning(ex, "Failed to close the account...");
                 throw;
             }
         }
@@ -37,12 +36,12 @@ namespace ShireBank.Server.Services
         {
             try
             {
-                await _resilientDbHandler.HandleAsync(async () => await _accountQueries.DepositFunds(request.AccountId, request.Amount));
+                await _resilientQueryHandler.HandleAsync(async () => await _accountQueries.DepositFunds(request.AccountId, request.Amount));
                 return new DepositResponse();
             }
-            catch
+            catch (Exception ex)
             {
-                _logger.LogWarning("Failed to deposit funds...");
+                _logger.LogWarning(ex, "Failed to deposit funds...");
                 throw;
             }
         }
@@ -54,9 +53,9 @@ namespace ShireBank.Server.Services
                 var account = await _accountQueries.GetAccountWithTransactions(request.AccountId);
                 return new GetHistoryResponse { History = account.ToString() };
             }
-            catch
+            catch (Exception ex)
             {
-                _logger.LogWarning("Failed to get history...");
+                _logger.LogWarning(ex, "Failed to get history...");
                 throw;
             }
         }
@@ -68,9 +67,9 @@ namespace ShireBank.Server.Services
                 var newAccount = await _accountQueries.OpenAccount(request.FirstName, request.LastName, request.DebtLimit);
                 return new OpenAccountResponse { AccountId = newAccount.Id };
             }
-            catch
+            catch (Exception ex)
             {
-                _logger.LogWarning("Failed to create the account...");
+                _logger.LogWarning(ex, "Failed to create the account...");
                 return new OpenAccountResponse();
             }
         }
@@ -79,12 +78,12 @@ namespace ShireBank.Server.Services
         {
             try
             {
-                var withdrawnAmount = await _resilientDbHandler.HandleAsync(async () => await _accountQueries.WithdrawFunds(request.AccountId, request.Amount));
+                var withdrawnAmount = await _resilientQueryHandler.HandleAsync(async () => await _accountQueries.WithdrawFunds(request.AccountId, request.Amount));
                 return new WithdrawResponse { WithdrawnAmount = withdrawnAmount };
             }
-            catch
+            catch (Exception ex)
             {
-                _logger.LogWarning("Failed to withdraw funds...");
+                _logger.LogWarning(ex, "Failed to withdraw funds...");
                 throw;
             }
         }

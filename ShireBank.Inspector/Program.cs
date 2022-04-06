@@ -14,7 +14,7 @@ var inspector = new InspectorService(inspectorClient);
 inspector.StartInspection();
 
 var summary = inspector.GetFullSummary();
-logger.Info(summary); // use NLOG
+logger.Info(summary); 
 
 Console.ReadKey();
 inspector.FinishInspection();

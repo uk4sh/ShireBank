@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using Moq;
 using Moq.EntityFrameworkCore;
 using ShireBank.Server.Database;
@@ -6,7 +5,6 @@ using ShireBank.Server.Database.Queries;
 using ShireBank.Server.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Xunit;
 
